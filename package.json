@@ -2,7 +2,7 @@
   "name": "hubocator-script",
   "version": "0.0.0",
   "description": "Hubot script that reload hubot that executed by hubocator(hubot executer)'s ",
-  "main": "index.js",
+  "main": "scripts/hubocator.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

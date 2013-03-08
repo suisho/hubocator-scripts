@@ -13,14 +13,17 @@
 Util = require "util"
 Hubot = require "hubot"
 User = Hubot.User
-hubocatorInfoHook = (callback) ->
+
+showInfo = (callback) ->
   process.once "message", (msg) ->
     if msg.HUBOCATOR_CMD != "info"
       return
     info = msg.HUBOCATOR_INFO
     callback(info)
   process.send {HUBOCATOR_CMD : "show_info"}
-  
+
+
+
 module.exports = (robot) ->
   self = this;
   @restartUser;
@@ -32,7 +35,7 @@ module.exports = (robot) ->
       user = robot.brain.userForId(userId)
       if not user
         return
-      hubocatorInfoHook (info) =>
+      showInfo (info) =>
         if not info.restarted
           return
         try
@@ -54,7 +57,7 @@ module.exports = (robot) ->
 
   # show hubocator info
   robot.respond /show hubocator/i,(msg) ->
-    hubocatorInfoHook (info) ->
+    showInfo (info) ->
       if info
         for key, value of info
           msg.send "HUBOCATOR:" +  key + " => " + Util.inspect(value)
